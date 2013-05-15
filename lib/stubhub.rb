@@ -1,3 +1,4 @@
+require 'hashie'
 require 'json'
 require 'httparty'
 require 'ostruct'

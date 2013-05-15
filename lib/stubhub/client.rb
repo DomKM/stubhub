@@ -32,14 +32,14 @@ module Stubhub
 
     def self.parse(body,klass)
       parsed_result = JSON.parse(body)
-      objects = parsed_result["response"]["docs"].map { |doc| klass.new(doc) }.map do |obj|
+      objects = parsed_result["response"]["docs"].map do |obj|
         hsh = {}
         obj.each do |key, val|
           next unless /id\z/ === key
           hsh[key] = val.to_i
         end
         obj.merge hsh
-      end
+      end.map { |doc| klass.new(doc) }
       objects.length == 1 ? objects.first : objects
     end
 
