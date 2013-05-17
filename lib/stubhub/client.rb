@@ -35,10 +35,10 @@ module Stubhub
       objects = parsed_result["response"]["docs"].map do |obj|
         hsh = {}
         obj.each do |key, val|
-          next unless /id\z/ === key
-          hsh[key] = val.to_i
+          id = val.is_a?(String) && /\A\d*\z/ && (/_id\z/ === key || /\Aid\z/ === key)
+          hsh[key.underscore] = id ? val.to_i : val
         end
-        obj.merge hsh
+        hsh
       end.map { |doc| klass.new(doc) }
       objects.length == 1 ? objects.first : objects
     end

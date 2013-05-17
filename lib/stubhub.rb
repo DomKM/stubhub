@@ -1,4 +1,5 @@
 require 'hashie'
+require 'active_support/core_ext/string/inflections'
 require 'json'
 require 'httparty'
 require 'ostruct'
