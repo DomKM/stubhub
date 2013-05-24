@@ -7,8 +7,8 @@ module Stubhub
     def self.make_request(klass, params, options = {})
       require 'cgi' unless defined?(CGI) && defined?(CGI::escape)
       path = options.delete(:path) || "listingCatalog/select"
-      query_url = convert_query_to_url(params, options)
-      result = get("http://partner-feed.stubhub.com/#{path}/?#{query_url}")
+      query_url = convert_query_to_url(params, options)   
+      result = get("http://partner-feed.stubhub.com/#{path}/?#{query_url}&rows=999999")
       parse(result.body,klass)
     end
 
